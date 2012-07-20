@@ -102,10 +102,11 @@ The grouper allows you to output additional markup based on the count of the ent
 
     {exp:grouper}
 
-Group start
+Grouper start, end and nth
 
 {exp:grouper:start groupby="5" count="{count}" total="{total_results}"}
 {exp:grouper:end groupby="5" count="{count}" total="{total_results}"}
+{exp:grouper:nth n="5" count="{count}"}
 
 
 
