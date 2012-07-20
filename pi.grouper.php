@@ -118,5 +118,5 @@ Grouper start, end and nth
     }
     // END
 }
-/* End of file pi.memberlist.php */
-/* Location: ./system/expressionengine/third_party/memberlist/pi.memberlist.php */
+/* End of file pi.grouper.php */
+/* Location: ./system/expressionengine/third_party/grouper/pi.grouper.php */
