@@ -7,14 +7,14 @@
  * @category        Plugin
  * @author      Matt Nichoslon
  * @copyright       Copyright (c) 2012, Matt Nichoslon
- * @link        http://archivestudio.co.uk
+ * @link        https://github.com/mattnicholson/EEgrouper
  */
 
 $plugin_info = array(
   'pi_name'         => 'Grouper',
   'pi_version'      => '1.0',
   'pi_author'       => 'Matt Nicholson',
-  'pi_author_url'   => 'http://archivestudio.co.uk/',
+  'pi_author_url'   => 'https://github.com/mattnicholson/EEgrouper',
   'pi_description'  => 'Allows you to create croups within entry feeds based on a count',
   'pi_usage'        => Grouper::usage()
 );
@@ -75,6 +75,14 @@ class Grouper
 		endif;
 		return ($count % $group_count == 0 || $count == $total) ? $this->EE->TMPL->tagdata :"";
     }
+    
+    public function nth(){
+    	$count = $this->EE->TMPL->fetch_param('count');
+    	$group_count = $this->EE->TMPL->fetch_param('n');
+    	
+    	return ($count % $group_count == 0) ? $this->EE->TMPL->tagdata :"";
+    	
+    }
 
     // --------------------------------------------------------------------
 
@@ -96,7 +104,7 @@ The grouper allows you to output additional markup based on the count of the ent
 
 Group start
 
-{exp:grouper:start groupby="5" count="{count}"}
+{exp:grouper:start groupby="5" count="{count}" total="{total_results}"}
 {exp:grouper:end groupby="5" count="{count}" total="{total_results}"}
 
 
