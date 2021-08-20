@@ -12,7 +12,7 @@
 
 $plugin_info = array(
   'pi_name'         => 'Grouper',
-  'pi_version'      => '1.0',
+  'pi_version'      => '2.0',
   'pi_author'       => 'Matt Nicholson',
   'pi_author_url'   => 'https://github.com/mattnicholson/EEgrouper',
   'pi_description'  => 'Allows you to create croups within entry feeds based on a count',
@@ -36,51 +36,50 @@ class Grouper
      */
     public function __construct()
     {
-        $this->EE =& get_instance();
 
        
     }
     
     public function start(){
     
-    	$count = $this->EE->TMPL->fetch_param('count');
-    	$group_count = $this->EE->TMPL->fetch_param('groupby');
-    	$total = $this->EE->TMPL->fetch_param('total');
+    	$count = ee()->TMPL->fetch_param('count');
+    	$group_count = ee()->TMPL->fetch_param('groupby');
+    	$total = ee()->TMPL->fetch_param('total');
     	
     	$data['last_class'] = '';
     	
     	if(($count - 1) % $group_count == 0):
     		$groups = ceil($total / $group_count);
-    		if($count == $groups) $data['last_class'] = $this->EE->TMPL->fetch_param('last_class');
+    		if($count == $groups) $data['last_class'] = ee()->TMPL->fetch_param('last_class');
     	endif;
     	
 		// If group count is 1, it means do it once, not do it every time
 		if($group_count == 1):
-			return ($count == 1) ? $this->EE->TMPL->tagdata :"";
+			return ($count == 1) ? ee()->TMPL->tagdata :"";
 		else:
-			return (($count - 1) % $group_count == 0) ? $this->EE->TMPL->parse_variables($this->EE->TMPL->tagdata, array($data)) :"";
+			return (($count - 1) % $group_count == 0) ? ee()->TMPL->parse_variables(ee()->TMPL->tagdata, array($data)) :"";
 		endif;
     }
     
     public function end(){
-    	$count = $this->EE->TMPL->fetch_param('count');
-    	$group_count = $this->EE->TMPL->fetch_param('groupby');
-    	$total = $this->EE->TMPL->fetch_param('total');
+    	$count = ee()->TMPL->fetch_param('count');
+    	$group_count = ee()->TMPL->fetch_param('groupby');
+    	$total = ee()->TMPL->fetch_param('total');
     	
 		// If group count is 1, it means last not every
 		if($group_count == 1):
 			
-			return ($count == $total) ? $this->EE->TMPL->tagdata : "";
+			return ($count == $total) ? ee()->TMPL->tagdata : "";
 			
 		endif;
-		return ($count % $group_count == 0 || $count == $total) ? $this->EE->TMPL->tagdata :"";
+		return ($count % $group_count == 0 || $count == $total) ? ee()->TMPL->tagdata :"";
     }
     
     public function nth(){
-    	$count = $this->EE->TMPL->fetch_param('count');
-    	$group_count = $this->EE->TMPL->fetch_param('n');
+    	$count = ee()->TMPL->fetch_param('count');
+    	$group_count = ee()->TMPL->fetch_param('n');
     	
-    	return ($count % $group_count == 0) ? $this->EE->TMPL->tagdata :"";
+    	return ($count % $group_count == 0) ? ee()->TMPL->tagdata :"";
     	
     }
 
